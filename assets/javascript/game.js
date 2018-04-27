@@ -96,7 +96,7 @@ $(document).ready(function() {
 
             hanPH = hanImg;
 
-            $("#chooseCharacter").append(hanImg);
+            $("#chooseCharacter").append(hanPH);
 
         // create luke's image, give it attributes, render it in chooseCharacter div
             var lukeImg = $("<img>");
@@ -109,7 +109,7 @@ $(document).ready(function() {
 
             lukePH = lukeImg;
 
-            $("#chooseCharacter").append(lukeImg);
+            $("#chooseCharacter").append(lukePH);
 
         // create vader's image, give it attributes, render it in chooseCharacter div
             var vaderImg = $("<img>");
@@ -122,7 +122,7 @@ $(document).ready(function() {
 
             vaderPH = vaderImg;
 
-            $("#chooseCharacter").append(vaderImg);
+            $("#chooseCharacter").append(vaderPH);
 
 
         // create emperor's image, give it attributes, render it in chooseCharacter div
@@ -136,63 +136,124 @@ $(document).ready(function() {
 
             emperorPH = emperorImg;
 
-            $("#chooseCharacter").append(emperorImg);
+            $("#chooseCharacter").append(emperorPH);
 
             // populate enemies array
             enemies = [starWarsRPG.characters.han.name, starWarsRPG.characters.luke.name, starWarsRPG.characters.vader.name, starWarsRPG.characters.emperor.name];
 
+            //
             // 
             // 
-            // 
-            // end of reset section
+            // END OF RESET SECTION
 
 
             // BEGINNING OF CHOOSE CHARACTER SECTION
             // 
             // 
             // 
+            // CURRENT BUGS
+            //      .addClass("enemy"); isn't doing anything, even though the append sections right below work
+            //      
 
-        // when user clicks on a character choice, it moves to "Your Character" section and others move to "Enemies" section
+        // when user clicks on a character choice, it moves to "Your Character" section, others move to "Enemies" section, enemies are given enemy class
         $(".char").click( function() {
 
-            console.log("click is working");
+            console.log("choose character click is working");
 
             // clear chooseCharacter div
             $("#chooseCharacter").empty();
 
-            // put clicked character in #user div and user variable, remove from enemies array, put others in #enemies div
+            // put clicked character in #user div and user variable, remove from enemies array, put others in #enemies div, give them enemy class
             $("#user").append(this);
 
             if (this.id == "han") {
+
                 user = "Han Solo";
+
                 enemies = ["Luke Skywalker", "Darth Vader", "Emperor Palpatine"];
+
+                $(lukePH).addClass("enemy");
+                $(vaderPH).addClass("enemy");
+                $(emperorPH).addClass("enemy");
+
                 $("#enemies").append(lukePH);
                 $("#enemies").append(vaderPH);
                 $("#enemies").append(emperorPH);
+
+
             } else if (this.id == "luke") {
+
                 user = "Luke Skywalker";
+
                 enemies = ["Han Solo", "Darth Vader", "Emperor Palpatine"];
+
+                $(hanPH).addClass("enemy");
+                $(vaderPH).addClass("enemy");
+                $(emperorPH).addClass("enemy");
+
                 $("#enemies").append(hanPH);
                 $("#enemies").append(vaderPH);
                 $("#enemies").append(emperorPH);
+
+
             } else if (this.id == "vader") {
+
                 user = "Darth Vader";
+
                 enemies = ["Han Solo", "Luke Skywalker", "Emperor Palpatine"];
+
+                $(hanPH).addClass("enemy");
+                $(lukePH).addClass("enemy");
+                $(emperorPH).addClass("enemy");
+
                 $("#enemies").append(hanPH);
                 $("#enemies").append(lukePH);
                 $("#enemies").append(emperorPH);
-            } else if (this.id == "emperor") {
+
+
+            } else {
+
                 user = "Emperor Palpatine";
+
                 enemies = ["Han Solo", "Luke Skywalker", "Darth Vader"];
+
+                $(hanPH).addClass("enemy");
+                $(lukePH).addClass("enemy");
+                $(vaderPH).addClass("enemy");
+
                 $("#enemies").append(hanPH);
                 $("#enemies").append(lukePH);
                 $("#enemies").append(vaderPH);
+
+
             }
 
                 // 
                 // 
                 // 
-                // end of choose character section
+                // END OF CHOOSE CHARACTER SECTION
+
+                // BEGINNING OF CHOOSE FIRST OPPONENT SECTION
+                // 
+                // 
+                // 
+                // CURRENT BUGS
+                //
+
+            $(".enemy").click( function() {
+
+                console.log("made it to select enemy click function");
+
+
+
+
+
+                // 
+                // 
+                // 
+                // END OF SELECT FIRST ENEMY SECTION
+
+            });
         }); 
     });
 
