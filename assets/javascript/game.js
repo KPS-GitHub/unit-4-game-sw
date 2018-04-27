@@ -64,9 +64,23 @@ var fightCount = 1;
 
 $(document).ready(function() {
 
+    // render section headings
+    $("#user").append("<h2>Your Character</h2>");
+    $("#enemies").append("<h2>Enemies</h2>");
+    $("#defender").append("<h2>Current Defender</h2>");
+
+
     $("#newGameButton").click( function() {
-        // clear character choices div - prevents multiple stacks of character images if user keeps pushing new game over and over
+        // BEGINNING OF RESET SECTION
+        // 
+        // 
+
+        // clear all divs and render headings
         $("#chooseCharacter").empty();
+        $("#user").empty().append("<h2>Your Character</h2>");
+        $("#enemies").empty().append("<h2>Enemies</h2>");
+        $("#defender").empty().append("<h2>Current Defender</h2>");
+
 
         // reset fightCount
         fightCount = 1;
@@ -114,7 +128,7 @@ $(document).ready(function() {
         // create emperor's image, give it attributes, render it in chooseCharacter div
             var emperorImg = $("<img>");
             emperorImg.attr("src", starWarsRPG.characters.emperor.pic);
-            emperorImg.attr("id", "vader");
+            emperorImg.attr("id", "emperor");
             emperorImg.attr("hp", starWarsRPG.characters.emperor.stats[0]);
             emperorImg.attr("ap", starWarsRPG.characters.emperor.stats[1]);
             emperorImg.attr("cap", starWarsRPG.characters.emperor.stats[2]);
@@ -126,45 +140,60 @@ $(document).ready(function() {
 
             // populate enemies array
             enemies = [starWarsRPG.characters.han.name, starWarsRPG.characters.luke.name, starWarsRPG.characters.vader.name, starWarsRPG.characters.emperor.name];
-            console.log("enemies: " + enemies);
 
-            // end of new game button functionality
-    });
-
-    // when character clicks on a character choice, it moves to "Your Character" section and others move to "Enemies" section
-    $(".char").click( function() {
-        // clear chooseCharacter div
-        $("#chooseCharacter").empty();
-
-        // put clicked character in #user div and user variable, remove from enemies array, put others in #enemies div
-        $("#user").append(this);
-        if (this.id == "han") {
-            user = "Han Solo";
-            enemies = ["Luke Skywalker", "Darth Vader", "Emperor Palpatine"];
-            $("#enemies").append(lukePH);
-            $("#enemies").append(vaderPH);
-            $("#enemies").append(emperorPH);
-        } else if (this.id == "luke") {
-            user = "Luke Skywalker";
-            enemies = ["Han Solo", "Darth Vader", "Emperor Palpatine"];
-            $("#enemies").append(hanPH);
-            $("#enemies").append(vaderPH);
-            $("#enemies").append(emperorPH);
-        } else if (this.id == "vader") {
-            user = "Darth Vader";
-            enemies = ["Han Solo", "Luke Skywalker", "Emperor Palpatine"];
-            $("#enemies").append(hanPH);
-            $("#enemies").append(lukePH);
-            $("#enemies").append(emperorPH);
-        } else if (this.id == "emperor") {
-            user = "Emperor Palpatine";
-            enemies = ["Han Solo", "Luke Skywalker", "Darth Vader"];
-            $("#enemies").append(hanPH);
-            $("#enemies").append(lukePH);
-            $("#enemies").append(vaderPH);
-        }
+            // 
+            // 
+            // 
+            // end of reset section
 
 
+            // BEGINNING OF CHOOSE CHARACTER SECTION
+            // 
+            // 
+            // 
+
+        // when user clicks on a character choice, it moves to "Your Character" section and others move to "Enemies" section
+        $(".char").click( function() {
+
+            console.log("click is working");
+
+            // clear chooseCharacter div
+            $("#chooseCharacter").empty();
+
+            // put clicked character in #user div and user variable, remove from enemies array, put others in #enemies div
+            $("#user").append(this);
+
+            if (this.id == "han") {
+                user = "Han Solo";
+                enemies = ["Luke Skywalker", "Darth Vader", "Emperor Palpatine"];
+                $("#enemies").append(lukePH);
+                $("#enemies").append(vaderPH);
+                $("#enemies").append(emperorPH);
+            } else if (this.id == "luke") {
+                user = "Luke Skywalker";
+                enemies = ["Han Solo", "Darth Vader", "Emperor Palpatine"];
+                $("#enemies").append(hanPH);
+                $("#enemies").append(vaderPH);
+                $("#enemies").append(emperorPH);
+            } else if (this.id == "vader") {
+                user = "Darth Vader";
+                enemies = ["Han Solo", "Luke Skywalker", "Emperor Palpatine"];
+                $("#enemies").append(hanPH);
+                $("#enemies").append(lukePH);
+                $("#enemies").append(emperorPH);
+            } else if (this.id == "emperor") {
+                user = "Emperor Palpatine";
+                enemies = ["Han Solo", "Luke Skywalker", "Darth Vader"];
+                $("#enemies").append(hanPH);
+                $("#enemies").append(lukePH);
+                $("#enemies").append(vaderPH);
+            }
+
+                // 
+                // 
+                // 
+                // end of choose character section
+        }); 
     });
 
 });
