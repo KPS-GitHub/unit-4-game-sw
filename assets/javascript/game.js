@@ -38,5 +38,16 @@ var starWarsRPG = {
             ]
         },
     },
-    
+
+    functions: {
+        chooseCharacter: function() {
+
+        },
+        chooseEnemy: function() {
+
+        },
+        attack: function() {
+            
+        }
+    },
 }
