@@ -62,6 +62,10 @@ var enemies = [];
 // keeps track of which fight is next (3 total fights)
 var fightCount = 1;
 
+// current fight stat trackers
+var uHP;
+var dHP;
+
 $(document).ready(function() {
 
     // render section headings
@@ -139,21 +143,7 @@ $(document).ready(function() {
             $("#chooseCharacter").append(emperorPH);
 
             // populate enemies array
-            enemies = [starWarsRPG.characters.han.name, starWarsRPG.characters.luke.name, starWarsRPG.characters.vader.name, starWarsRPG.characters.emperor.name];
-
-            //
-            // 
-            // 
-            // END OF RESET SECTION
-
-
-            // BEGINNING OF CHOOSE CHARACTER SECTION
-            // 
-            // 
-            // 
-            // CURRENT BUGS
-            //      .addClass("enemy"); isn't doing anything, even though the append sections right below work
-            //      
+            enemies = [starWarsRPG.characters.han.name, starWarsRPG.characters.luke.name, starWarsRPG.characters.vader.name, starWarsRPG.characters.emperor.name]; 
 
         // when user clicks on a character choice, it moves to "Your Character" section, others move to "Enemies" section, enemies are given enemy class
         $(".char").click( function() {
@@ -166,6 +156,9 @@ $(document).ready(function() {
             // put clicked character in #user div and user variable, remove from enemies array, put others in #enemies div, give them enemy class
             $("#user").append(this);
 
+            // HAN SOLO SECTION
+            // 
+            // 
             if (this.id == "han") {
 
                 user = "Han Solo";
@@ -179,6 +172,21 @@ $(document).ready(function() {
                 $("#enemies").append(lukePH);
                 $("#enemies").append(vaderPH);
                 $("#enemies").append(emperorPH);
+
+
+                $(".enemy").click( function() {
+                    $("#defender").append(this);
+
+                    $(this).addClass("defender");
+
+                    if (this.id == "luke") {
+                        dHP = starWarsRPG.characters.luke.stats[0];
+                    } else if (this.id == "vader") {
+
+                    } else {
+
+                    };
+                });
 
 
             } else if (this.id == "luke") {
@@ -226,34 +234,8 @@ $(document).ready(function() {
                 $("#enemies").append(vaderPH);
 
 
-            }
+            };
 
-                // 
-                // 
-                // 
-                // END OF CHOOSE CHARACTER SECTION
-
-                // BEGINNING OF CHOOSE FIRST OPPONENT SECTION
-                // 
-                // 
-                // 
-                // CURRENT BUGS
-                //
-
-            $(".enemy").click( function() {
-
-                console.log("made it to select enemy click function");
-
-
-
-
-
-                // 
-                // 
-                // 
-                // END OF SELECT FIRST ENEMY SECTION
-
-            });
         }); 
     });
 
