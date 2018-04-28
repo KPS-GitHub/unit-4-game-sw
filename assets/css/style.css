@@ -1,6 +1,18 @@
+body {
+    background-image: url("../images/starBackground.png");
+    color: white;
+    text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+}
+
 img {
     width: 100px;
     height: 100px;
+    border: 5px solid white;
+    border-radius: 5px;
 }
 
 .center {

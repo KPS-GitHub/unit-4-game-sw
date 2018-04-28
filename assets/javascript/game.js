@@ -441,8 +441,6 @@ $(document).ready(function() {
                     $("#instructions").html("<p>Click Attack to Attack Your Opponent</p>");
                     $("#instructions").append("<p>Be Careful! Your Opponent Will Strike Back After Each Attack!</p>");
 
-                    // turn off .enemy click functionality until fight with current opponent ends
-                    $(".enemy").off("click");
                     // move chosen enemy to #defender div, remove them from #enemies div, give them class of defender
                     $(this).remove(); 
                     $("#defender").append(this);
