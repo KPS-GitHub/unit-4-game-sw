@@ -84,7 +84,7 @@ $(document).ready(function() {
 
         // clear all divs and render headings
         $("#chooseCharacter").empty();
-        $("#user").empty().append("<h2>Your Character</h2>");
+        $("#userImg").empty().append("<h2>Your Character</h2>");
         $("#enemies").empty().append("<h2>Enemies</h2>");
         $("#defender").empty().append("<h2>Current Defender</h2>");
 
@@ -185,17 +185,24 @@ $(document).ready(function() {
 
 
                 $(".enemy").click( function() {
+                    console.log("no error immediately after clicking enemy to fight");
                     // move chosen enemy to #defender div, remove them from #enemies div, give them class of defender
+                    $(this).remove(); 
                     $("#defender").append(this);
-                    $("#enemies").remove(this);
+                    console.log("no error immediately after adding enemy to #defender div");
+                    console.log("no error immediately after removing first enemy from #enemies div");
                     $(this).addClass("defender");
+                    console.log("no error immediately after giving first defender the defender class");
 
                     if (this.id == "luke") {
+                        console.log("no error before setting dhp and dcap");
                         // set dHP and dCAP equal to Luke's corresponding stats
                         dHP = starWarsRPG.characters.luke.stats[0];
                         dCAP = starWarsRPG.characters.luke.stats[2];
+
+                        console.log("no error after setting dhp and dcap");
                         // code for attacking Luke
-                        $("#attack").click( function() {
+                        $("#attack").on("click",  function() {
                             // general flow of an attack:
                             //      subtract uAP from dHP and increase uAP
                             dHP -= uAP;
@@ -204,15 +211,8 @@ $(document).ready(function() {
                             //      check if defender is dead (is dHP <= 0 ?)
                             if (dHP <= 0) {    // if defender is dead:
                                 $("#defender").empty(); // remove luke from defender div
-                                $("#message").html("<h2>You Defeated Luke! Click another opponent to start the next battle.");
-
-                                // Luke is dead; now user chooses vader or the emperor
-
-
-
-
-
-
+                                enemies = ["Darth Vader", "Emperor Palpatine"]; // remove luke from enemies array
+                                $("#message").html("<h2>You Defeated Luke! Click another opponent to start the next battle.</h2>");
                             } else {   // if defender is not dead: 
                                 uHP -= dCAP;    // subtract defender cap from user hp
                                 // check if user character is dead
