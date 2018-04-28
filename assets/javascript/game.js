@@ -7,7 +7,7 @@ var starWarsRPG = {
                 ap = 5,
                 cap = 10
             ],
-            pic: "assets/images/vaderThumbsUp.jpg",
+            pic: "assets/images/han.png",
         },
         luke: {
             name: "Luke Skywalker",
@@ -16,7 +16,7 @@ var starWarsRPG = {
                 ap = 7,
                 cap = 8
             ],
-            pic: "assets/images/vaderThumbsUp.jpg",
+            pic: "assets/images/luke.png",
         },
         vader: {
             name: "Darth Vader",
@@ -34,7 +34,7 @@ var starWarsRPG = {
                 ap = 9,
                 cap = 12
             ],
-            pic: "assets/images/vaderThumbsUp.jpg",
+            pic: "assets/images/emperor.png",
         },
         userCharacter: {
             name: "",
@@ -64,7 +64,10 @@ var fightCount = 1;
 
 // current fight stat trackers
 var uHP;
+var uAP;
+var uAPBase;
 var dHP;
+var dCAP;
 
 $(document).ready(function() {
 
@@ -156,13 +159,20 @@ $(document).ready(function() {
             // put clicked character in #user div and user variable, remove from enemies array, put others in #enemies div, give them enemy class
             $("#user").append(this);
 
-            // HAN SOLO SECTION
+            // HAN SOLO SECTION - will contain everything from picking han through the end of the game
             // 
             // 
             if (this.id == "han") {
 
+                // set user hp and attack power variables to han's base stats to be carried through the game
+                uHP = starWarsRPG.characters.han.stats[0];
+                uAP = starWarsRPG.characters.han.stats[1];
+                uAPBase = starWarsRPG.characters.han.stats[1];
+
+                // store han in the user var
                 user = "Han Solo";
 
+                // store others in enemies array, give their images the class enemy, place them in the #enemies div
                 enemies = ["Luke Skywalker", "Darth Vader", "Emperor Palpatine"];
 
                 $(lukePH).addClass("enemy");
@@ -175,12 +185,45 @@ $(document).ready(function() {
 
 
                 $(".enemy").click( function() {
+                    // move chosen enemy to #defender div, remove them from #enemies div, give them class of defender
                     $("#defender").append(this);
-
+                    $("#enemies").remove(this);
                     $(this).addClass("defender");
 
                     if (this.id == "luke") {
+                        // set dHP and dCAP equal to Luke's corresponding stats
                         dHP = starWarsRPG.characters.luke.stats[0];
+                        dCAP = starWarsRPG.characters.luke.stats[2];
+                        // code for attacking Luke
+                        $("#attack").click( function() {
+                            // general flow of an attack:
+                            //      subtract uAP from dHP and increase uAP
+                            dHP -= uAP;
+                            uAP += uAPBase;
+                            console.log("dHP: " + dHP + " and uAP: " + uAP);
+                            //      check if defender is dead (is dHP <= 0 ?)
+                            if (dHP <= 0) {    // if defender is dead:
+                                $("#defender").empty(); // remove luke from defender div
+                                $("#message").html("<h2>You Defeated Luke! Click another opponent to start the next battle.");
+
+                                // Luke is dead; now user chooses vader or the emperor
+
+
+
+
+
+
+                            } else {   // if defender is not dead: 
+                                uHP -= dCAP;    // subtract defender cap from user hp
+                                // check if user character is dead
+                                if (uHP <= 0) {  // if user character is dead
+                                    $("#message").html("You Have Died! Click New Game to Try Again");
+                                } // if neither the player nor the defender is dead, nothing happens until user clicks attack 
+                                  // again and then this process runs again to determine if the fight is over or not
+
+                            }
+
+                        });
                     } else if (this.id == "vader") {
 
                     } else {
