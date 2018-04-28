@@ -73,6 +73,7 @@ var uAPBase;
 var dHP;
 var dCAP;
 
+
 $(document).ready(function() {
 
     //  ------ FIRST MAJOR SECTION ------
@@ -82,6 +83,9 @@ $(document).ready(function() {
     // 
     // FOR THE SAKE OF GOOD CODING, I WILL COME BACK AND CONSOLIDATE REPEATED CODE INTO FUNCTIONS SO THAT THE CODE ISN'T SO LONG AND IS MORE ORGANIZED
     // I WILL ALSO ATTEMPT TO INCLUDE ALL OF THE FUNCTIONS IN THE GAME OBJECT TO FURTHER ORGANIZE AND CONSOLIDATE
+
+    // render starting instructions
+    $("#instructions").html("<p>Choose Your Character</p>");
 
     // render section headings
     $("#user").append("<h2>Your Character</h2>");
@@ -132,6 +136,9 @@ $(document).ready(function() {
 
     // when user clicks on a character choice, it moves to "Your Character" section, others move to "Enemies" section, enemies are given enemy class
     $(".char").click( function() {
+
+        // render instructions for next step
+        $("#instructions").html("<p>Now Choose Your First Opponent from the Enemies List</p>");
 
         // clear chooseCharacter div
         $("#chooseCharacter").empty();
@@ -201,78 +208,91 @@ $(document).ready(function() {
 
 
         };
+        
+        // if statement testing to see if there's a fight in progress (enemy in the #defender div)
+        //      -prevents having multiple enemies in #defender div
 
-        $(".enemy").click( function() {
-            console.log("no error immediately after clicking enemy to fight");
-            // move chosen enemy to #defender div, remove them from #enemies div, give them class of defender
-            $(this).remove(); 
-            $("#defender").append(this);
-            $(this).addClass("defender");
-            // remove col-sm-3 class so that defender image isn't squeezed into 1/4 of available div space
-            $(this).removeClass("col-sm-3");
+        $(".enemy").on("click", function() {           
 
-            if (this.id == "han") {
-                defender = "Han Solo";
-                // set dHP and dCAP equal to Luke's corresponding stats
-                dHP = starWarsRPG.characters.han.stats[0];
-                dCAP = starWarsRPG.characters.han.stats[2];
-            } else if (this.id == "luke") {
-                defender = "Luke Skywalker";
-                // set dHP and dCAP equal to Luke's corresponding stats
-                dHP = starWarsRPG.characters.luke.stats[0];
-                dCAP = starWarsRPG.characters.luke.stats[2];
-            } else if (this.id == "vader") {
-                defender = "Darth Vader";
-                // set dHP and dCAP equal to Luke's corresponding stats
-                dHP = starWarsRPG.characters.vader.stats[0];
-                dCAP = starWarsRPG.characters.vader.stats[2];
-            } else {
-                defender = "Emperor Palpatine";
-                // set dHP and dCAP equal to Luke's corresponding stats
-                dHP = starWarsRPG.characters.emperor.stats[0];
-                dCAP = starWarsRPG.characters.emperor.stats[2];
-            };
+                // render fight instructions
+                $("#instructions").html("<p>Click Attack to Attack Your Opponent</p>");
+                $("#instructions").append("<p>Be Careful! Your Opponent Will Strike Back After Each Attack!</p>");
 
-            $("#attack").on("click",  function() {
-                // general flow of an attack:
-                // reduce defender HP by user AP
-                dHP -= uAP;
-                // increase uAP by uAPBase
-                uAP += uAPBase;
-                console.log("dHP: " + dHP);
-                console.log("uHP: " + uHP + " and uAP: " + uAP);
-                // check if defender is dead (is dHP <= 0 ?)
-                if (dHP <= 0) {    // if defender is dead:
+                // move chosen enemy to #defender div, remove them from #enemies div, give them class of defender
+                $(this).remove(); 
+                $("#defender").append(this);
+                $(this).addClass("defender");
+                // remove col-sm-3 class so that defender image isn't squeezed into 1/4 of available div space
+                $(this).removeClass("col-sm-3");
 
-                    // turn off attack button functionality until next defender is chosen
-                    //  -ensures that clicking attack with no defender present does not mess with any counters (uAP, fightCount, etc.)
-                    $("#attack").off("click");
+                if (this.id == "han") {
+                    defender = "Han Solo";
+                    // set dHP and dCAP equal to Luke's corresponding stats
+                    dHP = starWarsRPG.characters.han.stats[0];
+                    dCAP = starWarsRPG.characters.han.stats[2];
+                } else if (this.id == "luke") {
+                    defender = "Luke Skywalker";
+                    // set dHP and dCAP equal to Luke's corresponding stats
+                    dHP = starWarsRPG.characters.luke.stats[0];
+                    dCAP = starWarsRPG.characters.luke.stats[2];
+                } else if (this.id == "vader") {
+                    defender = "Darth Vader";
+                    // set dHP and dCAP equal to Luke's corresponding stats
+                    dHP = starWarsRPG.characters.vader.stats[0];
+                    dCAP = starWarsRPG.characters.vader.stats[2];
+                } else {
+                    defender = "Emperor Palpatine";
+                    // set dHP and dCAP equal to Luke's corresponding stats
+                    dHP = starWarsRPG.characters.emperor.stats[0];
+                    dCAP = starWarsRPG.characters.emperor.stats[2];
+                };
 
-                    $("#defender").empty(); // empty #defender div
-                    $("#defender").append("<h2>Current Defender</h2>"); // render #defender div heading again
-                    fightCount -= 1; // subtract one from fightCount
-                    console.log("fightCount: " + fightCount);
-                    if (fightCount == 0) {   // user has completed all fights and has won the game
-                        $("#message").html("<h2>YOU WON! Click New Game to play again.</h2>");
-                    } else {  // user has completed this fight, but there are still enemies to fight
-                        $("#message").html("<h2>You Defeated " + defender + "! Click another opponent to start the next battle.</h2>");
-                    }
-
-                } else {   // if defender is not dead: 
-                    uHP -= dCAP;    // subtract defender cap from user hp
+                $("#attack").on("click",  function() {
+                    // general flow of an attack:
+                    // reduce defender HP by user AP
+                    dHP -= uAP;
+                    // increase uAP by uAPBase
+                    uAP += uAPBase;
                     console.log("dHP: " + dHP);
                     console.log("uHP: " + uHP + " and uAP: " + uAP);
-                    // check if user character is dead
-                    if (uHP <= 0) {  // if user character is dead
+                    // check if defender is dead (is dHP <= 0 ?)
+                    if (dHP <= 0) {    // if defender is dead:
+
+                        // render update in #instructions div
+                        $("#instructions").html("<p>You Defeated Your Opponent!</p>");
+
+                        // turn off attack button functionality until next defender is chosen
+                        //  -ensures that clicking attack with no defender present does not mess with any counters (uAP, fightCount, etc.)
+                        $("#attack").off("click");
+
+                        $("#defender").empty(); // empty #defender div
+                        $("#defender").append("<h2>Current Defender</h2>"); // render #defender div heading again
+                        fightCount -= 1; // subtract one from fightCount
+                        console.log("fightCount: " + fightCount);
+                        if (fightCount == 0) {   // user has completed all fights and has won the game
+                            $("#message").html("<h2>YOU WON! Click New Game to play again.</h2>");
+                        } else {  // user has completed this fight, but there are still enemies to fight
+                            $("#message").html("<h2>You Defeated " + defender + "! Click another opponent to start the next battle.</h2>");
+                        }
+
+                    } else {   // if defender is not dead: 
+                        uHP -= dCAP;    // subtract defender cap from user hp
+                        console.log("dHP: " + dHP);
+                        console.log("uHP: " + uHP + " and uAP: " + uAP);
+                        // check if user character is dead
+                        if (uHP <= 0) {  // if user character is dead
+                        // change fight var to indicate that there is no longer a fight in progress
+                        fight = false;
+                        // render update in #instructions div
+                        $("#instructions").html("<p>Your Opponent Has Defeated You</p>");
                         $("#message").html("<h2>You Have Died! Click New Game to Try Again</h2>");
-                    } // if neither the player nor the defender is dead, nothing happens until user clicks attack 
-                    // again and then this process runs again to determine if the fight is over or not
+                        } // if neither the player nor the defender is dead, nothing happens until user clicks attack 
+                        // again and then this process runs again to determine if the fight is over or not
 
-                }
+                    }
 
+                });
             });
-        });
-
     }); 
 
 
@@ -291,6 +311,8 @@ $(document).ready(function() {
         $("#user").empty().append("<h2>Your Character</h2>");
         $("#enemies").empty().append("<h2>Enemies</h2>");
         $("#defender").empty().append("<h2>Current Defender</h2>");
+        // render starting instructions
+        $("#instructions").html("<p>Choose Your Character</p>");
 
 
         // reset fightCount
@@ -339,6 +361,9 @@ $(document).ready(function() {
 
         // when user clicks on a character choice, it moves to "Your Character" section, others move to "Enemies" section, enemies are given enemy class
         $(".char").click( function() {
+
+            // render instructions for next step
+            $("#instructions").html("<p>Now Choose Your First Opponent from the Enemies List</p>");
 
             // clear chooseCharacter div
             $("#chooseCharacter").empty();
@@ -409,77 +434,89 @@ $(document).ready(function() {
 
             };
 
-            $(".enemy").click( function() {
-                console.log("no error immediately after clicking enemy to fight");
-                // move chosen enemy to #defender div, remove them from #enemies div, give them class of defender
-                $(this).remove(); 
-                $("#defender").append(this);
-                $(this).addClass("defender");
-                // remove col-sm-3 class so that defender image isn't squeezed into 1/4 of available div space
-                $(this).removeClass("col-sm-3");
 
-                if (this.id == "han") {
-                    defender = "Han Solo";
-                    // set dHP and dCAP equal to Luke's corresponding stats
-                    dHP = starWarsRPG.characters.han.stats[0];
-                    dCAP = starWarsRPG.characters.han.stats[2];
-                } else if (this.id == "luke") {
-                    defender = "Luke Skywalker";
-                    // set dHP and dCAP equal to Luke's corresponding stats
-                    dHP = starWarsRPG.characters.luke.stats[0];
-                    dCAP = starWarsRPG.characters.luke.stats[2];
-                } else if (this.id == "vader") {
-                    defender = "Darth Vader";
-                    // set dHP and dCAP equal to Luke's corresponding stats
-                    dHP = starWarsRPG.characters.vader.stats[0];
-                    dCAP = starWarsRPG.characters.vader.stats[2];
-                } else {
-                    defender = "Emperor Palpatine";
-                    // set dHP and dCAP equal to Luke's corresponding stats
-                    dHP = starWarsRPG.characters.emperor.stats[0];
-                    dCAP = starWarsRPG.characters.emperor.stats[2];
-                };
+                $(".enemy").on("click", function() {
 
-                $("#attack").on("click",  function() {
-                    // general flow of an attack:
-                    // reduce defender HP by user AP
-                    dHP -= uAP;
-                    // increase uAP by uAPBase
-                    uAP += uAPBase;
-                    console.log("dHP: " + dHP);
-                    console.log("uHP: " + uHP + " and uAP: " + uAP);
-                    // check if defender is dead (is dHP <= 0 ?)
-                    if (dHP <= 0) {    // if defender is dead:
+                    // render fight instructions
+                    $("#instructions").html("<p>Click Attack to Attack Your Opponent</p>");
+                    $("#instructions").append("<p>Be Careful! Your Opponent Will Strike Back After Each Attack!</p>");
 
-                        // turn off attack button functionality until next defender is chosen
-                        //  -ensures that clicking attack with no defender present does not mess with any counters (uAP, fightCount, etc.)
-                        $("#attack").off("click");
+                    // turn off .enemy click functionality until fight with current opponent ends
+                    $(".enemy").off("click");
+                    // move chosen enemy to #defender div, remove them from #enemies div, give them class of defender
+                    $(this).remove(); 
+                    $("#defender").append(this);
+                    $(this).addClass("defender");
+                    // remove col-sm-3 class so that defender image isn't squeezed into 1/4 of available div space
+                    $(this).removeClass("col-sm-3");
 
-                        $("#defender").empty(); // empty #defender div
-                        $("#defender").append("<h2>Current Defender</h2>"); // render #defender div heading again
-                        fightCount -= 1; // subtract one from fightCount
-                        console.log("fightCount: " + fightCount);
-                        if (fightCount == 0) {   // user has completed all fights and has won the game
-                            $("#message").html("<h2>YOU WON! Click New Game to play again.</h2>");
-                        } else {  // user has completed this fight, but there are still enemies to fight
-                            $("#message").html("<h2>You Defeated " + defender + "! Click another opponent to start the next battle.</h2>");
-                        }
+                    if (this.id == "han") {
+                        defender = "Han Solo";
+                        // set dHP and dCAP equal to Luke's corresponding stats
+                        dHP = starWarsRPG.characters.han.stats[0];
+                        dCAP = starWarsRPG.characters.han.stats[2];
+                    } else if (this.id == "luke") {
+                        defender = "Luke Skywalker";
+                        // set dHP and dCAP equal to Luke's corresponding stats
+                        dHP = starWarsRPG.characters.luke.stats[0];
+                        dCAP = starWarsRPG.characters.luke.stats[2];
+                    } else if (this.id == "vader") {
+                        defender = "Darth Vader";
+                        // set dHP and dCAP equal to Luke's corresponding stats
+                        dHP = starWarsRPG.characters.vader.stats[0];
+                        dCAP = starWarsRPG.characters.vader.stats[2];
+                    } else {
+                        defender = "Emperor Palpatine";
+                        // set dHP and dCAP equal to Luke's corresponding stats
+                        dHP = starWarsRPG.characters.emperor.stats[0];
+                        dCAP = starWarsRPG.characters.emperor.stats[2];
+                    };
 
-                    } else {   // if defender is not dead: 
-                        uHP -= dCAP;    // subtract defender cap from user hp
+                    $("#attack").on("click",  function() {
+                        // general flow of an attack:
+                        // reduce defender HP by user AP
+                        dHP -= uAP;
+                        // increase uAP by uAPBase
+                        uAP += uAPBase;
                         console.log("dHP: " + dHP);
                         console.log("uHP: " + uHP + " and uAP: " + uAP);
-                        // check if user character is dead
-                        if (uHP <= 0) {  // if user character is dead
-                            $("#message").html("<h2>You Have Died! Click New Game to Try Again</h2>");
-                        } // if neither the player nor the defender is dead, nothing happens until user clicks attack 
-                          // again and then this process runs again to determine if the fight is over or not
+                        // check if defender is dead (is dHP <= 0 ?)
+                        if (dHP <= 0) {    // if defender is dead:
 
-                    }
+                            // render update in #instructions div
+                            $("#instructions").html("<p>You Defeated Your Opponent!</p>");
 
+                            // turn off attack button functionality until next defender is chosen
+                            //  -ensures that clicking attack with no defender present does not mess with any counters (uAP, fightCount, etc.)
+                            $("#attack").off("click");
+
+                            $("#defender").empty(); // empty #defender div
+                            $("#defender").append("<h2>Current Defender</h2>"); // render #defender div heading again
+                            fightCount -= 1; // subtract one from fightCount
+                            console.log("fightCount: " + fightCount);
+                            if (fightCount == 0) {   // user has completed all fights and has won the game
+                                $("#message").html("<h2>YOU WON! Click New Game to play again.</h2>");
+                            } else {  // user has completed this fight, but there are still enemies to fight
+                                $("#message").html("<h2>You Defeated " + defender + "! Click another opponent to start the next battle.</h2>");
+                            }
+
+                        } else {   // if defender is not dead: 
+                            uHP -= dCAP;    // subtract defender cap from user hp
+                            console.log("dHP: " + dHP);
+                            console.log("uHP: " + uHP + " and uAP: " + uAP);
+                            // check if user character is dead
+                            if (uHP <= 0) {  // if user character is dead
+                                // render update in #instructions div
+                                $("#instructions").html("<p>Your Opponent Has Defeated You</p>");
+                                // render game over message
+                                $("#message").html("<h2>You Have Died! Click New Game to Try Again</h2>");
+                            } // if neither the player nor the defender is dead, nothing happens until user clicks attack 
+                            // again and then this process runs again to determine if the fight is over or not
+
+                        }
+
+                    });
                 });
-            });
-
         }); 
     });
 
@@ -488,75 +525,6 @@ $(document).ready(function() {
 
 // TO DO - MAKE GAME OBJECT AND GAME ADAPTABLE TO ANY OBJECT OF THE SAME STRUCTURE 
 //      Will be a lot of work (functions to change every instance of gameObject in js, change game object to have generic properties, etc.)
-
-
-
-
-// $(".enemy").click( function() {
-//     console.log("no error immediately after clicking enemy to fight");
-//     // move chosen enemy to #defender div, remove them from #enemies div, give them class of defender
-//     $(this).remove(); 
-//     $("#defender").append(this);
-//     console.log("no error immediately after adding enemy to #defender div");
-//     console.log("no error immediately after removing first enemy from #enemies div");
-//     $(this).addClass("defender");
-//     console.log("no error immediately after giving first defender the defender class");
-
-//     if (this.id == "luke") {
-//         console.log("no error before setting dhp and dcap");
-
-//         defender = "luke";
-//         // set dHP and dCAP equal to Luke's corresponding stats
-//         dHP = starWarsRPG.characters.luke.stats[0];
-//         dCAP = starWarsRPG.characters.luke.stats[2];
-
-//         console.log("no error after setting dhp and dcap");
-//         // code for attacking Luke
-       
-//     } else if (this.id == "vader") {
-//         defender = "vader";
-//         // set dHP and dCAP equal to Luke's corresponding stats
-//         dHP = starWarsRPG.characters.vader.stats[0];
-//         dCAP = starWarsRPG.characters.vader.stats[2];
-
-//     } else {
-//         defender = "emperor";
-//         // set dHP and dCAP equal to Luke's corresponding stats
-//         dHP = starWarsRPG.characters.emperor.stats[0];
-//         dCAP = starWarsRPG.characters.emperor.stats[2];
-
-//     };
-
-//     $("#attack").on("click",  function() {
-//         // general flow of an attack:
-//         // subtract uAP from dHP and increase uAP
-//         dHP -= uAP;
-//         uAP += uAPBase;
-//         console.log("dHP: " + dHP);
-//         console.log("uHP: " + uHP + " and uAP: " + uAP);
-//         //      check if defender is dead (is dHP <= 0 ?)
-//         if (dHP <= 0) {    // if defender is dead:
-//             $("#defender").empty(); // empty #defender div
-//             fightCount -= 1; // subtract one from fightCount
-//             console.log("fightCount: " + fightCount);
-//             if (fightCount == 0) {   // user has completed all fights and has won the game
-//                 $("#message").html("<h2>YOU WON! Click New Game to play again.</h2>");
-//             } else {
-//                 $("#message").html("<h2>You Defeated " + defender + "! Click another opponent to start the next battle.</h2>");
-//             }
-
-//         } else {   // if defender is not dead: 
-//             uHP -= dCAP;    // subtract defender cap from user hp
-//             // check if user character is dead
-//             if (uHP <= 0) {  // if user character is dead
-//                 $("#message").html("<h2>You Have Died! Click New Game to Try Again</h2>");
-//             } // if neither the player nor the defender is dead, nothing happens until user clicks attack 
-//               // again and then this process runs again to determine if the fight is over or not
-
-//         }
-
-//     });
-// });
 
 // scrapped code
 
