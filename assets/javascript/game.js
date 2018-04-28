@@ -250,34 +250,28 @@ $(document).ready(function() {
                 // move chosen enemy to #defender div, remove them from #enemies div, give them class of defender
                 $(this).remove(); 
                 $("#defender").append(this);
-                console.log("no error immediately after adding enemy to #defender div");
-                console.log("no error immediately after removing first enemy from #enemies div");
                 $(this).addClass("defender");
-                console.log("no error immediately after giving first defender the defender class");
 
-                if (this.id == "luke") {
-                    console.log("no error before setting dhp and dcap");
-
-                    defender = "luke";
+                if (this.id == "han") {
+                    defender = "Han Solo";
+                    // set dHP and dCAP equal to Luke's corresponding stats
+                    dHP = starWarsRPG.characters.han.stats[0];
+                    dCAP = starWarsRPG.characters.han.stats[2];
+                } else if (this.id == "luke") {
+                    defender = "Luke Skywalker";
                     // set dHP and dCAP equal to Luke's corresponding stats
                     dHP = starWarsRPG.characters.luke.stats[0];
                     dCAP = starWarsRPG.characters.luke.stats[2];
-
-                    console.log("no error after setting dhp and dcap");
-                    // code for attacking Luke
-                   
                 } else if (this.id == "vader") {
-                    defender = "vader";
+                    defender = "Darth Vader";
                     // set dHP and dCAP equal to Luke's corresponding stats
                     dHP = starWarsRPG.characters.vader.stats[0];
                     dCAP = starWarsRPG.characters.vader.stats[2];
-
                 } else {
-                    defender = "emperor";
+                    defender = "Emperor Palpatine";
                     // set dHP and dCAP equal to Luke's corresponding stats
                     dHP = starWarsRPG.characters.emperor.stats[0];
                     dCAP = starWarsRPG.characters.emperor.stats[2];
-
                 };
 
                 $("#attack").on("click",  function() {
@@ -288,8 +282,14 @@ $(document).ready(function() {
                     console.log("uHP: " + uHP + " and uAP: " + uAP);
                     // check if defender is dead (is dHP <= 0 ?)
                     if (dHP <= 0) {    // if defender is dead:
+
+                        // turn off attack button functionality until next defender is chosen
+                        //  -ensures that clicking attack with no defender present does not mess with any counters (uAP, fightCount, etc.)
+                        $("#attack").off("click");
+
                         $("#defender").empty(); // empty #defender div
-                        fightCount -= 1; // subtract one from fightCount
+    // BUG
+                        fightCount -= 1; // subtract one from fightCount - BUGGED - decreases on repeated attack clicks when there is no defender
                         console.log("fightCount: " + fightCount);
                         if (fightCount == 0) {   // user has completed all fights and has won the game
                             $("#message").html("<h2>YOU WON! Click New Game to play again.</h2>");
