@@ -96,6 +96,11 @@ $(document).ready(function() {
 
     // create and render character images
         // create han's image, give it id and classes, render it in chooseCharacter div
+
+//         <figure class="figure">
+//          <img src="..." class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
+//          <figcaption class="figure-caption">A caption for the above image.</figcaption>
+//         </figure>
             var hanImg = $("<img>");
             hanImg.attr("src", starWarsRPG.characters.han.pic);
             hanImg.attr("id", "han");
