@@ -281,6 +281,9 @@ $(document).ready(function() {
                             console.log("fightCount: " + fightCount);
                             if (fightCount == 0) {   // user has completed all fights and has won the game
                                 $("#message").html("<h2>YOU WON! Click New Game to play again.</h2>");
+                                // kill all click functionality except for the new game button (attack is already turned off at this point)
+                                $(".char").off("click");
+                                $(".enemy").off("click");
                             } else {  // user has completed this fight, but there are still enemies to fight
                                 $("#message").html("<h2>You Defeated " + defender + "! Click another opponent to start the next battle.</h2>");
                             }
