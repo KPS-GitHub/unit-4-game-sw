@@ -9,10 +9,15 @@ body {
 }
 
 .char {
-    width: 100px;
-    height: 100px;
+    background-color: black;
     border: 5px solid white;
     border-radius: 5px;
+    /* max-width: 33.3333%; */
+}
+
+.char img{
+    max-width: 75%;
+    max-height: 75%;
 }
 
 .center {
@@ -26,3 +31,13 @@ body {
 .botMarg {
     margin-bottom: 1em;
 }
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* .row#chooseCharacter {
+    height: 18em;
+} */

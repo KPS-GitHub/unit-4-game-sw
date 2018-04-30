@@ -90,53 +90,36 @@ $(document).ready(function() {
     $("#instructions").html("<p>Choose Your Character</p>");
 
     // render section headings
-    $("#user").append("<h2>Your Character</h2>");
-    $("#enemies").append("<h2>Enemies</h2>");
-    $("#defender").append("<h2>Current Defender</h2>");
+    $("#userTitle").append("<h2>Your Character</h2>");
+    $("#enemiesTitle").append("<h2>Enemies</h2>");
+    $("#defenderTitle").append("<h2>Current Defender</h2>");
 
     // create and render character images
-        // create han's image, give it id and classes, render it in chooseCharacter div
-
-//         <figure class="figure">
-//          <img src="..." class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
-//          <figcaption class="figure-caption">A caption for the above image.</figcaption>
-//         </figure>
-            var hanImg = $("<img>");
-            hanImg.attr("src", starWarsRPG.characters.han.pic);
-            hanImg.attr("id", "han");
-            hanImg.addClass("char");
-
+        // create han's image
+            var hanImg = $("<div id='han' class='char col-md-3'><p>Han Solo</p><img src='assets/images/han.png'><p>HP: <p id='hHP'></p></p></div>");
+            $("#hHP").text(starWarsRPG.characters.han.stats[0]);
             hanPH = hanImg;
 
             $("#chooseCharacter").append(hanPH);
 
-        // create luke's image, give it id and classes, render it in chooseCharacter div
-            var lukeImg = $("<img>");
-            lukeImg.attr("src", starWarsRPG.characters.luke.pic);
-            lukeImg.attr("id", "luke");
-            lukeImg.addClass("char");
-
+        // create luke's image
+            var lukeImg = $("<div id='luke' class='char col-md-3'><p>Luke Skywalker</p><img src='assets/images/luke.png'><p>HP: <p id='lHP'></p></p></div>");
+            $("#lHP").text(starWarsRPG.characters.luke.stats[0]);
             lukePH = lukeImg;
 
             $("#chooseCharacter").append(lukePH);
 
-        // create vader's image, give it id and classes, render it in chooseCharacter div
-            var vaderImg = $("<img>");
-            vaderImg.attr("src", starWarsRPG.characters.vader.pic);
-            vaderImg.attr("id", "vader");
-            vaderImg.addClass("char");
-
+        // create vader's image
+            var vaderImg = $("<div id='vader' class='char col-md-3'><p>Darth Vader</p><img src='assets/images/vaderThumbsUp.jpg'><p>HP: <p id='vHP'></p></p></div>");
+            $("#vHP").text(starWarsRPG.characters.vader.stats[0]);
             vaderPH = vaderImg;
 
             $("#chooseCharacter").append(vaderPH);
 
 
-        // create emperor's image, give it id and classes, render it in chooseCharacter div
-            var emperorImg = $("<img>");
-            emperorImg.attr("src", starWarsRPG.characters.emperor.pic);
-            emperorImg.attr("id", "emperor");
-            emperorImg.addClass("char");
-
+        // create emperor's image
+            var emperorImg = $("<div id='emperor' class='char col-md-3'><p>Emperor Poopatine</p><img src='assets/images/emperor.png'><p>HP: <p id='eHP'></p></p></div>");
+            $("#eHP").text(starWarsRPG.characters.emperor.stats[0]);
             emperorPH = emperorImg;
 
             $("#chooseCharacter").append(emperorPH);
@@ -150,15 +133,18 @@ $(document).ready(function() {
         // clear chooseCharacter div
         $("#chooseCharacter").empty();
 
-        // put clicked character in #user div and user variable, remove from enemies array, put others in #enemies div, give them enemy class
-        $("#user").append(this);
-
         if (this.id == "han") {
 
             // set user hp and attack power variables to han's base stats to be carried through the game
             uHP = starWarsRPG.characters.han.stats[0];
             uAP = starWarsRPG.characters.han.stats[1];
             uAPBase = starWarsRPG.characters.han.stats[1];
+
+            // rewrite the html for the chosen div
+            $(this).html("<p>Han Solo</p><img src='assets/images/han.png'><p>HP: <p id='uhp'></p></p>");
+            $("#uhp").text(uHP);
+
+            $("#user").append(this);
 
             $(lukePH).addClass("enemy");
             $(vaderPH).addClass("enemy");
@@ -175,6 +161,12 @@ $(document).ready(function() {
             uAP = starWarsRPG.characters.luke.stats[1];
             uAPBase = starWarsRPG.characters.luke.stats[1];
 
+            // rewrite the html for the chosen div
+            $(this).html("<p>Luke Skywalker</p><img src='assets/images/luke.png'><p>HP: <p id='uhp'></p></p>");
+            $("#uhp").text(uHP);
+
+            $("#user").append(this);
+
             $(hanPH).addClass("enemy");
             $(vaderPH).addClass("enemy");
             $(emperorPH).addClass("enemy");
@@ -185,10 +177,17 @@ $(document).ready(function() {
 
 
         } else if (this.id == "vader") {
+
             // set user hp and attack power variables to vader's base stats to be carried through the game
             uHP = starWarsRPG.characters.vader.stats[0];
             uAP = starWarsRPG.characters.vader.stats[1];
             uAPBase = starWarsRPG.characters.vader.stats[1];
+
+            // rewrite the html for the chosen div
+            $(this).html("<p>Darth Vader</p><img src='assets/images/vaderThumbsUp.jpg'><p>HP: <p id='uhp'></p></p>");
+            $("#uhp").text(uHP);
+
+            $("#user").append(this);
 
             $(hanPH).addClass("enemy");
             $(lukePH).addClass("enemy");
@@ -200,10 +199,17 @@ $(document).ready(function() {
 
 
         } else {
+
             // set user hp and attack power variables to emperor's base stats to be carried through the game
             uHP = starWarsRPG.characters.emperor.stats[0];
             uAP = starWarsRPG.characters.emperor.stats[1];
             uAPBase = starWarsRPG.characters.emperor.stats[1];
+
+            // rewrite the html for the chosen div
+            $(this).html("<p>Emperor Poopatine</p><img src='assets/images/emperor.png'><p>HP: <p id='uhp'></p></p>");
+            $("#uhp").text(uHP);
+
+            $("#user").append(this);
 
             $(hanPH).addClass("enemy");
             $(lukePH).addClass("enemy");
@@ -235,7 +241,7 @@ $(document).ready(function() {
 
                     if (this.id == "han") {
                         defender = "Han Solo";
-                        // set dHP and dCAP equal to Luke's corresponding stats
+                        // set dHP and dCAP equal to han's corresponding stats
                         dHP = starWarsRPG.characters.han.stats[0];
                         dCAP = starWarsRPG.characters.han.stats[2];
                     } else if (this.id == "luke") {
@@ -245,20 +251,21 @@ $(document).ready(function() {
                         dCAP = starWarsRPG.characters.luke.stats[2];
                     } else if (this.id == "vader") {
                         defender = "Darth Vader";
-                        // set dHP and dCAP equal to Luke's corresponding stats
+                        // set dHP and dCAP equal to vader's corresponding stats
                         dHP = starWarsRPG.characters.vader.stats[0];
                         dCAP = starWarsRPG.characters.vader.stats[2];
                     } else {
                         defender = "Emperor Palpatine";
-                        // set dHP and dCAP equal to Luke's corresponding stats
+                        // set dHP and dCAP equal to emperor's corresponding stats
                         dHP = starWarsRPG.characters.emperor.stats[0];
                         dCAP = starWarsRPG.characters.emperor.stats[2];
                     };
 
                     $("#attack").on("click",  function() {
                         // general flow of an attack:
-                        // reduce defender HP by user AP
+                        // reduce defender HP by user AP and render new defender hp
                         dHP -= uAP;
+                        $(".dHP").html("<p>HP: " + dHP + "</p>");
                         // increase uAP by uAPBase
                         uAP += uAPBase;
                         console.log("dHP: " + dHP);
@@ -290,6 +297,7 @@ $(document).ready(function() {
 
                         } else {   // if defender is not dead: 
                             uHP -= dCAP;    // subtract defender cap from user hp
+                            $("#uhp").text(uHP);
                             console.log("dHP: " + dHP);
                             console.log("uHP: " + uHP + " and uAP: " + uAP);
                             // check if user character is dead
@@ -321,10 +329,12 @@ $(document).ready(function() {
 
         // clear all divs and render headings
         $("#chooseCharacter").empty();
-        $("#userImg").empty();
-        $("#user").empty().append("<h2>Your Character</h2>");
-        $("#enemies").empty().append("<h2>Enemies</h2>");
-        $("#defender").empty().append("<h2>Current Defender</h2>");
+        $("#userTitle").empty().append("<h2>Your Character</h2>");
+        $("#user").empty();
+        $("#enemiesTitle").empty().append("<h2>Enemies</h2>");
+        $("#enemies").empty();
+        $("#defenderTitle").empty().append("<h2>Current Defender</h2>");
+        $("#defender").empty();
         // render starting instructions
         $("#instructions").html("<p>Choose Your Character</p>");
         // clear #message div
@@ -333,44 +343,32 @@ $(document).ready(function() {
 
         // reset fightCount
         fightCount = 3;
-
-        // create han's image, give it id and classes, render it in chooseCharacter div
-            var hanImg = $("<img>");
-            hanImg.attr("src", starWarsRPG.characters.han.pic);
-            hanImg.attr("id", "han");
-            hanImg.addClass("char");
-
+        // create and render character images
+            // create han's image
+            var hanImg = $("<div id='han' class='char col-md-3'><p>Han Solo</p><img src='assets/images/han.png'><p>HP: <p id='hHP'></p></p></div>");
+            $("#hHP").text(starWarsRPG.characters.han.stats[0]);
             hanPH = hanImg;
 
             $("#chooseCharacter").append(hanPH);
 
-        // create luke's image, give it id and classes, render it in chooseCharacter div
-            var lukeImg = $("<img>");
-            lukeImg.attr("src", starWarsRPG.characters.luke.pic);
-            lukeImg.attr("id", "luke");
-            lukeImg.addClass("char");
-
+        // create luke's image
+            var lukeImg = $("<div id='luke' class='char col-md-3'><p>Luke Skywalker</p><img src='assets/images/luke.png'><p>HP: <p id='lHP'></p></p></div>");
+            $("#lHP").text(starWarsRPG.characters.luke.stats[0]);
             lukePH = lukeImg;
 
             $("#chooseCharacter").append(lukePH);
 
-        // create vader's image, give it id and classes, render it in chooseCharacter div
-            var vaderImg = $("<img>");
-            vaderImg.attr("src", starWarsRPG.characters.vader.pic);
-            vaderImg.attr("id", "vader");
-            vaderImg.addClass("char");
-
+        // create vader's image
+            var vaderImg = $("<div id='vader' class='char col-md-3'><p>Darth Vader</p><img src='assets/images/vaderThumbsUp.jpg'><p>HP: <p id='vHP'></p></p></div>");
+            $("#vHP").text(starWarsRPG.characters.vader.stats[0]);
             vaderPH = vaderImg;
 
             $("#chooseCharacter").append(vaderPH);
 
 
-        // create emperor's image, give it id and classes, render it in chooseCharacter div
-            var emperorImg = $("<img>");
-            emperorImg.attr("src", starWarsRPG.characters.emperor.pic);
-            emperorImg.attr("id", "emperor");
-            emperorImg.addClass("char");
-
+        // create emperor's image
+            var emperorImg = $("<div id='emperor' class='char col-md-3'><p>Emperor Poopatine</p><img src='assets/images/emperor.png'><p>HP: <p id='eHP'></p></p></div>");
+            $("#eHP").text(starWarsRPG.characters.emperor.stats[0]);
             emperorPH = emperorImg;
 
             $("#chooseCharacter").append(emperorPH);
@@ -384,10 +382,11 @@ $(document).ready(function() {
             // clear chooseCharacter div
             $("#chooseCharacter").empty();
 
-            // put clicked character in #user div and user variable, remove from enemies array, put others in #enemies div, give them enemy class
-            $("#user").append(this);
-
             if (this.id == "han") {
+
+                $(this).html("<p>Han Solo</p><img src='assets/images/han.png'><p class='uHP'>HP: 200</p>");
+
+                $("#user").append(this);
 
                 // set user hp and attack power variables to han's base stats to be carried through the game
                 uHP = starWarsRPG.characters.han.stats[0];
@@ -404,6 +403,11 @@ $(document).ready(function() {
 
 
             } else if (this.id == "luke") {
+
+                $(this).html("<p>Luke Skywalker</p><img src='assets/images/luke.png'><p class='uHP'>HP: 125</p>");
+
+                $("#user").append(this);
+
                 // set user hp and attack power variables to luke's base stats to be carried through the game
                 uHP = starWarsRPG.characters.luke.stats[0];
                 uAP = starWarsRPG.characters.luke.stats[1];
@@ -419,6 +423,11 @@ $(document).ready(function() {
 
 
             } else if (this.id == "vader") {
+
+                $(this).html("<p>Darth Vader</p><img src='assets/images/vaderThumbsUp.jpg'><p class='uHP'>HP: 250</p>");
+
+                $("#user").append(this);
+
                 // set user hp and attack power variables to vader's base stats to be carried through the game
                 uHP = starWarsRPG.characters.vader.stats[0];
                 uAP = starWarsRPG.characters.vader.stats[1];
@@ -434,6 +443,11 @@ $(document).ready(function() {
 
 
             } else {
+
+                $(this).html("<p>Emperor Poopatine</p><img src='assets/images/emperor.png'><p class='uHP'>HP: 100</p>");
+
+                $("#user").append(this);
+
                 // set user hp and attack power variables to emperor's base stats to be carried through the game
                 uHP = starWarsRPG.characters.emperor.stats[0];
                 uAP = starWarsRPG.characters.emperor.stats[1];
@@ -496,6 +510,8 @@ $(document).ready(function() {
                         // general flow of an attack:
                         // reduce defender HP by user AP
                         dHP -= uAP;
+                        // update defender hp in window
+                        $(".dHP").html("<p>HP: " + dHP + "</p>");
                         // increase uAP by uAPBase
                         uAP += uAPBase;
                         console.log("dHP: " + dHP);
@@ -517,6 +533,10 @@ $(document).ready(function() {
                             fightCount -= 1; // subtract one from fightCount
                             console.log("fightCount: " + fightCount);
                             if (fightCount == 0) {   // user has completed all fights and has won the game
+                                // kill all click functionality except for the new game button (attack is already turned off at this point)
+                                $(".char").off("click");
+                                $(".enemy").off("click");
+                                // win message
                                 $("#message").html("<h2>YOU WON! Click New Game to play again.</h2>");
                             } else {  // user has completed this fight, but there are still enemies to fight
                                 $("#message").html("<h2>You Defeated " + defender + "! Click another opponent to start the next battle.</h2>");
@@ -524,6 +544,7 @@ $(document).ready(function() {
 
                         } else {   // if defender is not dead: 
                             uHP -= dCAP;    // subtract defender cap from user hp
+                            $("#uhp").text(uHP);
                             console.log("dHP: " + dHP);
                             console.log("uHP: " + uHP + " and uAP: " + uAP);
                             // check if user character is dead
