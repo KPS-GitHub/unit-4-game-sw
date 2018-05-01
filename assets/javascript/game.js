@@ -285,12 +285,12 @@ $(document).ready(function() {
                             fightCount -= 1; // subtract one from fightCount
                             console.log("fightCount: " + fightCount);
                             if (fightCount == 0) {   // user has completed all fights and has won the game
-                                $("#message").html("<h2>YOU WON! Click New Game to play again.</h2>");
+                                $("#instructions").html("<h2>YOU WON! Click New Game to play again.</h2>");
                                 // kill all click functionality except for the new game button (attack is already turned off at this point)
                                 $(".char").off("click");
                                 $(".enemy").off("click");
                             } else {  // user has completed this fight, but there are still enemies to fight
-                                $("#message").html("<h2>You Defeated " + defender + "! Click another opponent to start the next battle.</h2>");
+                                $("#instructions").html("<h2>You Defeated " + defender + "! Click another opponent to start the next battle.</h2>");
                             }
 
                         } else {   // if defender is not dead: 
@@ -304,8 +304,7 @@ $(document).ready(function() {
                                 fight = false;
 
                             // render update in #instructions div
-                            $("#instructions").html("<p>Your Opponent Has Defeated You</p>");
-                            $("#message").html("<h2>You Have Died! Click New Game to Try Again</h2>");
+                            $("#instructions").html("<h2>You Have Died! Click New Game to Try Again</h2>");
                             } // if neither the player nor the defender is dead, nothing happens until user clicks attack 
                             // again and then this process runs again to determine if the fight is over or not
 
@@ -362,7 +361,7 @@ $(document).ready(function() {
 
 
         // create emperor's image
-            var emperorImg = $("<div id='emperor' class='char col-md-3'><p>Emperor Poopatine</p><img src='assets/images/emperor.png'><p class='HP'>HP: 100</p></div>");
+            var emperorImg = $("<div id='emperor' class='char col-md-3'><p>Emperor Palpatine</p><img src='assets/images/emperor.png'><p class='HP'>HP: 100</p></div>");
             emperorPH = emperorImg;
 
             $("#chooseCharacter").append(emperorPH);
@@ -380,16 +379,16 @@ $(document).ready(function() {
 
             if (this.id == "han") {
 
-                $(this).html("<p>Han Solo</p><img src='assets/images/han.png'><p class='uHP'>HP: 200</p>");
-
-                $("#user").append(this);
-
-                $("#user .HP").text("HP: " + uHP);
+                $(this).html("<p>Han Solo</p><img src='assets/images/han.png'><p class='HP'>HP: 200</p>");
 
                 // set user hp and attack power variables to han's base stats to be carried through the game
                 uHP = starWarsRPG.characters.han.stats[0];
                 uAP = starWarsRPG.characters.han.stats[1];
                 uAPBase = starWarsRPG.characters.han.stats[1];
+
+                $("#user").append(this);
+
+                $("#user .HP").text("HP: " + uHP);
 
                 $(lukePH).addClass("enemy");
                 $(vaderPH).addClass("enemy");
@@ -402,16 +401,16 @@ $(document).ready(function() {
 
             } else if (this.id == "luke") {
 
-                $(this).html("<p>Luke Skywalker</p><img src='assets/images/luke.png'><p class='uHP'>HP: 125</p>");
-
-                $("#user").append(this);
-
-                $("#user .HP").text("HP: " + uHP);
+                $(this).html("<p>Luke Skywalker</p><img src='assets/images/luke.png'><p class='HP'>HP: 125</p>");
 
                 // set user hp and attack power variables to luke's base stats to be carried through the game
                 uHP = starWarsRPG.characters.luke.stats[0];
                 uAP = starWarsRPG.characters.luke.stats[1];
                 uAPBase = starWarsRPG.characters.luke.stats[1];
+
+                $("#user").append(this);
+
+                $("#user .HP").text("HP: " + uHP);
 
                 $(hanPH).addClass("enemy");
                 $(vaderPH).addClass("enemy");
@@ -424,16 +423,16 @@ $(document).ready(function() {
 
             } else if (this.id == "vader") {
 
-                $(this).html("<p>Darth Vader</p><img src='assets/images/vaderThumbsUp.jpg'><p class='uHP'>HP: 250</p>");
-
-                $("#user").append(this);
-
-                $("#user .HP").text("HP: " + uHP);
+                $(this).html("<p>Darth Vader</p><img src='assets/images/vaderThumbsUp.jpg'><p class='HP'>HP: 250</p>");
 
                 // set user hp and attack power variables to vader's base stats to be carried through the game
                 uHP = starWarsRPG.characters.vader.stats[0];
                 uAP = starWarsRPG.characters.vader.stats[1];
                 uAPBase = starWarsRPG.characters.vader.stats[1];
+
+                $("#user").append(this);
+
+                $("#user .HP").text("HP: " + uHP);
 
                 $(hanPH).addClass("enemy");
                 $(lukePH).addClass("enemy");
@@ -446,16 +445,16 @@ $(document).ready(function() {
 
             } else {
 
-                $(this).html("<p>Emperor Poopatine</p><img src='assets/images/emperor.png'><p class='uHP'>HP: 100</p>");
-
-                $("#user").append(this);
-
-                $("#user .HP").text("HP: " + uHP);
+                $(this).html("<p>Emperor Palpatine</p><img src='assets/images/emperor.png'><p class='HP'>HP: 100</p>");
 
                 // set user hp and attack power variables to emperor's base stats to be carried through the game
                 uHP = starWarsRPG.characters.emperor.stats[0];
                 uAP = starWarsRPG.characters.emperor.stats[1];
                 uAPBase = starWarsRPG.characters.emperor.stats[1];
+
+                $("#user").append(this);
+
+                $("#user .HP").text("HP: " + uHP);
 
                 $(hanPH).addClass("enemy");
                 $(lukePH).addClass("enemy");
@@ -548,9 +547,9 @@ $(document).ready(function() {
                                 $(".char").off("click");
                                 $(".enemy").off("click");
                                 // win message
-                                $("#message").html("<h2>YOU WON! Click New Game to play again.</h2>");
+                                $("#instructions").html("<h2>YOU WON! Click New Game to play again.</h2>");
                             } else {  // user has completed this fight, but there are still enemies to fight
-                                $("#message").html("<h2>You Defeated " + defender + "! Click another opponent to start the next battle.</h2>");
+                                $("#instructions").html("<h2>You Defeated " + defender + "! Click another opponent to start the next battle.</h2>");
                             }
 
                         } else {   // if defender is not dead: 
@@ -563,10 +562,8 @@ $(document).ready(function() {
 
                                 fight = false; 
                                 
-                                // render update in #instructions div
-                                $("#instructions").html("<p>Your Opponent Has Defeated You</p>");
                                 // render game over message
-                                $("#message").html("<h2>You Have Died! Click New Game to Try Again</h2>");
+                                $("#instructions").html("<h2>You Have Died! Click New Game to Try Again</h2>");
                             } // if neither the player nor the defender is dead, nothing happens until user clicks attack 
                             // again and then this process runs again to determine if the fight is over or not
 
