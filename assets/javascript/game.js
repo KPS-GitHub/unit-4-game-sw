@@ -125,6 +125,8 @@ $(document).ready(function() {
 
         $(".char").removeClass("col-md-3");
 
+        $(this).addClass("uBack");
+
         // render instructions for next step
         $("#instructions").html("<p>Now Choose Your First Opponent from the Enemies List</p>");
 
@@ -144,9 +146,9 @@ $(document).ready(function() {
 
             $("#user .HP").text("HP: " + uHP);
 
-            $(lukePH).addClass("enemy");
-            $(vaderPH).addClass("enemy");
-            $(emperorPH).addClass("enemy");
+            $(lukePH).addClass("enemy eBack");
+            $(vaderPH).addClass("enemy eBack");
+            $(emperorPH).addClass("enemy eBack");
 
             $("#enemies").append(lukePH);
             $("#enemies").append(vaderPH);
@@ -163,9 +165,9 @@ $(document).ready(function() {
 
             $("#user .HP").text("HP: " + uHP);
 
-            $(hanPH).addClass("enemy");
-            $(vaderPH).addClass("enemy");
-            $(emperorPH).addClass("enemy");
+            $(hanPH).addClass("enemy eBack");
+            $(vaderPH).addClass("enemy eBack");
+            $(emperorPH).addClass("enemy eBack");
 
             $("#enemies").append(hanPH);
             $("#enemies").append(vaderPH);
@@ -183,9 +185,9 @@ $(document).ready(function() {
 
             $("#user .HP").text("HP: " + uHP);
 
-            $(hanPH).addClass("enemy");
-            $(lukePH).addClass("enemy");
-            $(emperorPH).addClass("enemy");
+            $(hanPH).addClass("enemy eBack");
+            $(lukePH).addClass("enemy eBack");
+            $(emperorPH).addClass("enemy eBack");
 
             $("#enemies").append(hanPH);
             $("#enemies").append(lukePH);
@@ -203,9 +205,9 @@ $(document).ready(function() {
 
             $("#user .HP").text("HP: " + uHP);
 
-            $(hanPH).addClass("enemy");
-            $(lukePH).addClass("enemy");
-            $(vaderPH).addClass("enemy");
+            $(hanPH).addClass("enemy eBack");
+            $(lukePH).addClass("enemy eBack");
+            $(vaderPH).addClass("enemy eBack");
 
             $("#enemies").append(hanPH);
             $("#enemies").append(lukePH);
@@ -281,7 +283,6 @@ $(document).ready(function() {
                             $("#attack").off("click");
 
                             $("#defender").empty(); // empty #defender div
-                            $("#defender").append("<h2>Current Defender</h2>"); // render #defender div heading again
                             fightCount -= 1; // subtract one from fightCount
                             console.log("fightCount: " + fightCount);
                             if (fightCount == 0) {   // user has completed all fights and has won the game
@@ -371,6 +372,8 @@ $(document).ready(function() {
 
             $(".char").removeClass("col-md-3");
 
+            $(this).addClass("uBack");
+
             // render instructions for next step
             $("#instructions").html("<p>Now Choose Your First Opponent from the Enemies List</p>");
 
@@ -390,9 +393,9 @@ $(document).ready(function() {
 
                 $("#user .HP").text("HP: " + uHP);
 
-                $(lukePH).addClass("enemy");
-                $(vaderPH).addClass("enemy");
-                $(emperorPH).addClass("enemy");
+                $(lukePH).addClass("enemy eBack");
+                $(vaderPH).addClass("enemy eBack");
+                $(emperorPH).addClass("enemy eBack");
 
                 $("#enemies").append(lukePH);
                 $("#enemies").append(vaderPH);
@@ -412,9 +415,9 @@ $(document).ready(function() {
 
                 $("#user .HP").text("HP: " + uHP);
 
-                $(hanPH).addClass("enemy");
-                $(vaderPH).addClass("enemy");
-                $(emperorPH).addClass("enemy");
+                $(hanPH).addClass("enemy eBack");
+                $(vaderPH).addClass("enemy eBack");
+                $(emperorPH).addClass("enemy eBack");
 
                 $("#enemies").append(hanPH);
                 $("#enemies").append(vaderPH);
@@ -434,9 +437,9 @@ $(document).ready(function() {
 
                 $("#user .HP").text("HP: " + uHP);
 
-                $(hanPH).addClass("enemy");
-                $(lukePH).addClass("enemy");
-                $(emperorPH).addClass("enemy");
+                $(hanPH).addClass("enemy eBack");
+                $(lukePH).addClass("enemy eBack");
+                $(emperorPH).addClass("enemy eBack");
 
                 $("#enemies").append(hanPH);
                 $("#enemies").append(lukePH);
@@ -456,9 +459,9 @@ $(document).ready(function() {
 
                 $("#user .HP").text("HP: " + uHP);
 
-                $(hanPH).addClass("enemy");
-                $(lukePH).addClass("enemy");
-                $(vaderPH).addClass("enemy");
+                $(hanPH).addClass("enemy eBack");
+                $(lukePH).addClass("enemy eBack");
+                $(vaderPH).addClass("enemy eBack");
 
                 $("#enemies").append(hanPH);
                 $("#enemies").append(lukePH);

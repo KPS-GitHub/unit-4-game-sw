@@ -11,13 +11,22 @@ body {
 .char {
     background-color: black;
     border: 5px solid white;
+    outline: 2px solid black;
     border-radius: 5px;
-    /* max-width: 33.3333%; */
 }
 
-.char img{
-    max-width: 75%;
-    max-height: 75%;
+#instructions {
+    padding-top: .4em;
+    font-size: 1.5rem;
+    background-color: rgba(99, 82, 255, 0.5);
+    border: 5px solid white;
+    outline: 2px solid black;
+    border-radius: 5px;
+}
+
+img {
+    max-width: 6em;
+    max-height: 6em;
 }
 
 .center {
@@ -32,16 +41,21 @@ body {
     margin-bottom: 1em;
 }
 
+.uBack {
+    background-color: rgba(99, 82, 255, 0.5);
+}
+
+.eBack {
+    background-color: rgba(219, 0, 0, 0.76);
+}
+
 .clearfix::after {
     content: "";
     clear: both;
     display: table;
 }
 
-#instructions {
-    font-size: 2rem;
-    background-color: rgba(99, 82, 255, 0.5);
-}
+
 
 /* .row#chooseCharacter {
     height: 18em;
