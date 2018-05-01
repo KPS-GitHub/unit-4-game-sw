@@ -38,6 +38,11 @@ body {
     display: table;
 }
 
+#instructions {
+    font-size: 2rem;
+    background-color: rgba(99, 82, 255, 0.5);
+}
+
 /* .row#chooseCharacter {
     height: 18em;
 } */

@@ -123,6 +123,8 @@ $(document).ready(function() {
     // when user clicks on a character choice, it moves to "Your Character" section, others move to "Enemies" section, enemies are given enemy class
     $(".char").click( function() {
 
+        $(".char").removeClass("col-md-3");
+
         // render instructions for next step
         $("#instructions").html("<p>Now Choose Your First Opponent from the Enemies List</p>");
 
@@ -368,13 +370,13 @@ $(document).ready(function() {
         // when user clicks on a character choice, it moves to "Your Character" section, others move to "Enemies" section, enemies are given enemy class
         $(".char").click( function() {
 
+            $(".char").removeClass("col-md-3");
+
             // render instructions for next step
             $("#instructions").html("<p>Now Choose Your First Opponent from the Enemies List</p>");
 
             // clear chooseCharacter div
             $("#chooseCharacter").empty();
-
-            $(".char").removeClass("col-md-3");
 
             if (this.id == "han") {
 
