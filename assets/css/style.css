@@ -27,6 +27,7 @@ body {
 img {
     max-width: 6em;
     max-height: 6em;
+    border-radius: 4px;
 }
 
 .center {
@@ -54,9 +55,3 @@ img {
     clear: both;
     display: table;
 }
-
-
-
-/* .row#chooseCharacter {
-    height: 18em;
-} */
